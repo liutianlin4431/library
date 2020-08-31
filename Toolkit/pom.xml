@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.pack</groupId>
 	<artifactId>Toolkit</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.2</version>
 	<name>Toolkit</name>
 	<description>Demo project for Spring Boot</description>
 	<build>
@@ -64,6 +64,11 @@
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
 			<version>3.3.2</version>
+		</dependency>
+		<!-- 引入BASE64依赖 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
 		</dependency>
 	</dependencies>
 	<distributionManagement>

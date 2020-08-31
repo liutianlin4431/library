@@ -8,7 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -17,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 import com.pack.console.LocalExecute;
-import com.pack.entity.ReturnData;
 import com.pack.str.StrUtility;
 
 @Component
@@ -290,25 +293,29 @@ public class FileUtility {
 	}
 
 	/**
-	 * 获取文件夹下的 文件名
+	 * 获取当前文件夹下的内容
 	 * 
-	 * @param path
-	 * @return Z
+	 * @param Path
+	 * @return
 	 */
-	public static ReturnData getFileNames(String path) {
-		StringBuffer stringBuffer = new StringBuffer();
-		File file = new File(path);
-		File[] array = file.listFiles();
-		if (array == null) {
-			return new ReturnData(404, "path false!", 0, "该路径下没有文件");
-		}
-		for (int i = 0; i < array.length; i++) {
-			if (array[i].isFile()) {
-				stringBuffer.append(array[i].getName() + "<br/>");
-			} else if (array[i].isDirectory()) {
-				getFileNames(array[i].getPath());
+	public static List<Map<String, String>> findFolder(String Path) {
+		File folder = new File(Path);
+		File[] fileArray = folder.listFiles();
+		List<Map<String, String>> fL = new ArrayList<Map<String, String>>();
+		for (File file : fileArray) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", UUID.randomUUID().toString());
+			map.put("text", file.getName());
+			map.put("path", file.getAbsolutePath());
+			if (file.isDirectory()) {
+				// 文件夹
+				map.put("state", "closed");
+			} else {
+				// 文件
+				map.put("state", null);
 			}
+			fL.add(map);
 		}
-		return new ReturnData(200, "path ture!", 1, stringBuffer.toString());
+		return fL;
 	}
 }
