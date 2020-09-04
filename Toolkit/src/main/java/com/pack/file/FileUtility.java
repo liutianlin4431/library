@@ -18,12 +18,9 @@ import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
-
 import com.pack.console.LocalExecute;
 import com.pack.str.StrUtility;
 
-@Component
 public class FileUtility {
 
 	private static final String os_name = System.getProperty("os.name");

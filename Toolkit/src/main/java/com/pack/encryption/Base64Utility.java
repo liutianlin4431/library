@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.codec.binary.Base64;
-import org.springframework.stereotype.Component;
 
 import com.pack.str.StrUtility;
 
@@ -14,7 +13,6 @@ import com.pack.str.StrUtility;
  * @author ltl
  *
  */
-@Component
 public class Base64Utility {
 	/**
 	 * BASE64加密字符串(UTF-8)

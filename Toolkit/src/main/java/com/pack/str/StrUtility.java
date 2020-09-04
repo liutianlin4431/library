@@ -34,7 +34,7 @@ public class StrUtility {
 	}
 
 	/**
-	 * 判断str字符串中是否包含contains
+	 * 判断str字符串中是否包含contains(忽略大小写)
 	 * 
 	 * @param str      字符串
 	 * @param contains 包含字符串
@@ -48,7 +48,7 @@ public class StrUtility {
 	}
 
 	/**
-	 * 判断str字符串“开头”是否包含contains
+	 * 判断str字符串“开头”是否包含contains(忽略大小写)
 	 * 
 	 * @param str      字符串
 	 * @param contains 开头字符串
