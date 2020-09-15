@@ -13,11 +13,26 @@ import java.util.Arrays;
  *
  */
 public class Md5Util {
+	private static Md5Util md5 = null;
 
-	private static final String HEX_NUMS_STR = "0123456789ABCDEF";
-	private static final Integer SALT_LENGTH = 12;
+	public static Md5Util init() {
+		if (md5 == null) {
+			synchronized (Md5Util.class) {
+				if (md5 == null) {
+					md5 = new Md5Util();
+				}
+			}
+		}
+		return md5;
+	}
 
-	public static byte[] hexStringToByte(String hex) {
+	private Md5Util() {
+	}
+
+	private final String HEX_NUMS_STR = "0123456789ABCDEF";
+	private final Integer SALT_LENGTH = 12;
+
+	public byte[] hexStringToByte(String hex) {
 		int len = (hex.length() / 2);
 		byte[] result = new byte[len];
 		char[] hexChars = hex.toCharArray();
@@ -34,7 +49,7 @@ public class Md5Util {
 	 * @param b
 	 * @return
 	 */
-	public static String byteToHexString(byte[] b) {
+	public String byteToHexString(byte[] b) {
 		StringBuffer hexString = new StringBuffer();
 		for (int i = 0; i < b.length; i++) {
 			String hex = Integer.toHexString(b[i] & 0xFF);
@@ -55,7 +70,7 @@ public class Md5Util {
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
 	 */
-	public static boolean validPassword(String password, String passwordInDb)
+	public boolean validPassword(String password, String passwordInDb)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		// 将16进制字符串格式口令转换成字节数组
 		byte[] pwdInDb = hexStringToByte(passwordInDb);
@@ -93,7 +108,7 @@ public class Md5Util {
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
 	 */
-	public static String getEncryptedPwd(String password) {
+	public String getEncryptedPwd(String password) {
 		// 声明加密后的口令数组变量
 		byte[] pwd = null;
 		// 随机数生成器

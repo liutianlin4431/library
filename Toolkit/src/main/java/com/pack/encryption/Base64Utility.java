@@ -14,6 +14,23 @@ import com.pack.str.StrUtility;
  *
  */
 public class Base64Utility {
+	private static Base64Utility bu = null;
+
+	public static Base64Utility init() {
+		if (bu == null) {
+			synchronized (Base64Utility.class) {
+				if (bu == null) {
+					bu = new Base64Utility();
+				}
+			}
+		}
+		return bu;
+	}
+
+	private Base64Utility() {
+
+	}
+
 	/**
 	 * BASE64加密字符串(UTF-8)
 	 * 
@@ -33,10 +50,10 @@ public class Base64Utility {
 	 */
 	public static String encode(String str, String coding) {
 		try {
-			if (StrUtility.StrIsNull(str)) {
+			if (StrUtility.init().StrIsNull(str)) {
 				return null;
 			}
-			if (StrUtility.StrIsNull(coding)) {
+			if (StrUtility.init().StrIsNull(coding)) {
 				return encode(str);
 			}
 			return new String(Base64.encodeBase64(str.getBytes(coding)), coding);
@@ -64,10 +81,10 @@ public class Base64Utility {
 	 */
 	public static String decode(String str, String coding) {
 		try {
-			if (StrUtility.StrIsNull(str)) {
+			if (StrUtility.init().StrIsNull(str)) {
 				return null;
 			}
-			if (StrUtility.StrIsNull(coding)) {
+			if (StrUtility.init().StrIsNull(coding)) {
 				return decode(str);
 			}
 			return new String(Base64.decodeBase64(str.getBytes(coding)), coding);

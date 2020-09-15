@@ -1,37 +1,67 @@
 package com.pack.file.properties;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
 import org.springframework.core.io.ClassPathResource;
 
+import com.pack.file.FileUtility;
+
 public class PropertiesUtility {
+	private static PropertiesUtility pu = null;
+
+	public static PropertiesUtility init() {
+		if (pu == null) {
+			synchronized (PropertiesUtility.class) {
+				if (pu == null) {
+					pu = new PropertiesUtility();
+				}
+			}
+		}
+		return pu;
+	}
+
+	private PropertiesUtility() {
+	}
 
 	/**
-	 * 获取properties文件内容
+	 * 解析.properties文件(根据路径与名称获取)
 	 * 
-	 * @param fileName 文件名
+	 * @param path 文件路径
+	 * @param name 文件名称
 	 * @return
 	 */
-	public static Properties getProperties(String fileName) {
+	public Properties getPropertiesByPathAndName(String path, String name) {
+		path = FileUtility.init().StandardPath(path + "/" + name);
+		return this.getPropertiesByPath(path);
+	}
+
+	/**
+	 * 解析.properties文件
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public Properties getPropertiesByPath(String path) {
 		try {
 			// 生成properties对象
 			Properties p = new Properties();
-			ClassPathResource resource = new ClassPathResource("conf/" + fileName);
-			InputStream fis = resource.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-			String line = "";
-			while ((line = br.readLine()) != null) {
-				String array[] = line.split("=");
-				p.setProperty(array[0], array[1]);
-			}
+			ClassPathResource resource = new ClassPathResource(path);
+			p.load(resource.getInputStream());
 			return p;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * 解析.properties文件(默认路径为conf/)
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Properties getProperties(String name) {
+		return this.getPropertiesByPathAndName("conf/", name);
 	}
 
 }

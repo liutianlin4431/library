@@ -22,8 +22,23 @@ import com.pack.console.LocalExecute;
 import com.pack.str.StrUtility;
 
 public class FileUtility {
+	private static FileUtility fu = null;
 
-	private static final String os_name = System.getProperty("os.name");
+	public static FileUtility init() {
+		if (fu == null) {
+			synchronized (FileUtility.class) {
+				if (fu == null) {
+					fu = new FileUtility();
+				}
+			}
+		}
+		return fu;
+	}
+
+	private FileUtility() {
+	}
+
+	private final String os_name = System.getProperty("os.name");
 
 	/**
 	 * 规范路径斜杠（全部为“/”，兼容Linxu路径）
@@ -31,7 +46,7 @@ public class FileUtility {
 	 * @param path 地址
 	 * @return
 	 */
-	public static String StandardPath(String path) {
+	public String StandardPath(String path) {
 		path = path.replaceAll("\\\\{1,}", "/");
 		path = path.replaceAll("/{1,}", "/");
 		return path;
@@ -42,8 +57,8 @@ public class FileUtility {
 	 * 
 	 * @param path 地址
 	 */
-	public static void delPath(String path) {
-		if (StrUtility.Contains(os_name, "Windows")) {
+	public void delPath(String path) {
+		if (StrUtility.init().Contains(os_name, "Windows")) {
 			File file = new File(path);
 			if (file.isDirectory()) {
 				File[] files = file.listFiles();
@@ -60,7 +75,7 @@ public class FileUtility {
 				file.delete();
 			}
 		} else {
-			LocalExecute.runCommand("rm -rf " + path);
+			LocalExecute.init().runCommand("rm -rf " + path);
 		}
 	}
 
@@ -70,7 +85,7 @@ public class FileUtility {
 	 * @param response HttpServletResponse
 	 * @param filePath 文件存放地址
 	 */
-	public static void download(HttpServletResponse response, String filePath) {
+	public void download(HttpServletResponse response, String filePath) {
 
 		FileInputStream fis = null;
 		OutputStream os = null;
@@ -122,7 +137,7 @@ public class FileUtility {
 	 * @param sourcePath 源路径
 	 * @param zipPath    压缩路径
 	 */
-	public static void createZip(String sourcePath, String zipPath) {
+	public void createZip(String sourcePath, String zipPath) {
 		FileOutputStream fos = null;
 		ZipOutputStream zos = null;
 		try {
@@ -149,7 +164,7 @@ public class FileUtility {
 	 * @param plist   多个文件路径
 	 * @param zipPath 压缩路径
 	 */
-	public static void createZip(List<String> plist, String zipPath) {
+	public void createZip(List<String> plist, String zipPath) {
 		FileOutputStream fos = null;
 		ZipOutputStream zos = null;
 		try {
@@ -172,7 +187,7 @@ public class FileUtility {
 		}
 	}
 
-	private static void writeZip(File file, String parentPath, ZipOutputStream zos) {
+	private void writeZip(File file, String parentPath, ZipOutputStream zos) {
 		if (file.exists()) {
 			if (file.isDirectory()) {// 处理文件夹
 				parentPath += file.getName() + File.separator;
@@ -222,7 +237,7 @@ public class FileUtility {
 	 * @param filePath 文件地址
 	 * @return
 	 */
-	public static byte[] toByteArray(String filePath) {
+	public byte[] toByteArray(String filePath) {
 		File f = new File(filePath);
 		if (!f.exists()) {
 			return null;
@@ -261,7 +276,7 @@ public class FileUtility {
 	 * @param path 地址
 	 * @return
 	 */
-	public static boolean isBinary(String path) {
+	public boolean isBinary(String path) {
 		File file = new File(path);
 		boolean isBinary = false;
 		FileInputStream fin = null;
@@ -295,7 +310,7 @@ public class FileUtility {
 	 * @param Path
 	 * @return
 	 */
-	public static List<Map<String, String>> findFolder(String Path) {
+	public List<Map<String, String>> findFolder(String Path) {
 		File folder = new File(Path);
 		File[] fileArray = folder.listFiles();
 		List<Map<String, String>> fL = new ArrayList<Map<String, String>>();

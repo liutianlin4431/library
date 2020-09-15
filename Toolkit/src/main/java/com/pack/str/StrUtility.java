@@ -9,13 +9,29 @@ import java.util.Random;
  *
  */
 public class StrUtility {
+	private static StrUtility su = null;
+
+	public static StrUtility init() {
+		if (su == null) {
+			synchronized (StrUtility.class) {
+				if (su == null) {
+					su = new StrUtility();
+				}
+			}
+		}
+		return su;
+	}
+
+	private StrUtility() {
+	}
+
 	/**
 	 * 生成数字与字母随机组合字符串
 	 * 
 	 * @param length 长度
 	 * @return
 	 */
-	public static String randomCombinations(int length) {
+	public String randomCombinations(int length) {
 		String val = "";
 		Random random = new Random();
 		// length为几位密码
@@ -40,7 +56,7 @@ public class StrUtility {
 	 * @param contains 包含字符串
 	 * @return 包含返回true
 	 */
-	public static Boolean Contains(String str, String contains) {
+	public Boolean Contains(String str, String contains) {
 		// 将参数转换为小写
 		str = str.toLowerCase();
 		contains = contains.toLowerCase();
@@ -54,7 +70,7 @@ public class StrUtility {
 	 * @param contains 开头字符串
 	 * @return
 	 */
-	public static Boolean startsWith(String str, String contains) {
+	public Boolean startsWith(String str, String contains) {
 		str = str.toLowerCase();
 		contains = contains.toLowerCase();
 		return str.startsWith(contains);
@@ -66,7 +82,7 @@ public class StrUtility {
 	 * @param str 字符串
 	 * @return 空返回“true”；非空返回“false”；
 	 */
-	public static Boolean StrIsNull(String str) {
+	public Boolean StrIsNull(String str) {
 		if (str == null || str.equals("") || str.equals("null")) {
 			return true;
 		}

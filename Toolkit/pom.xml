@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.pack</groupId>
 	<artifactId>Toolkit</artifactId>
-	<version>1.0.2</version>
+	<version>1.2.1</version>
 	<name>Toolkit</name>
 	<description>Demo project for Spring Boot</description>
 	<build>

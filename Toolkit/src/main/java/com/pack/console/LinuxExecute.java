@@ -22,9 +22,29 @@ import com.jcraft.jsch.SftpException;
  * @author ltl
  *
  */
-@SuppressWarnings("static-access")
 public class LinuxExecute {
 	private static Logger log = LoggerFactory.getLogger(LinuxExecute.class);
+
+	private static LinuxExecute le = null;
+
+	/**
+	 * 创建类（单例）
+	 * 
+	 * @return
+	 */
+	public static LinuxExecute init() {
+		if (le == null) {
+			synchronized (LinuxExecute.class) {
+				if (le == null) {
+					le = new LinuxExecute();
+				}
+			}
+		}
+		return le;
+	}
+
+	private LinuxExecute() {
+	}
 
 	/**
 	 * 跨服务器执行linux命令； 使用jsch时密码不能为空； 当不使用jsch时，命令自动添加ssh命令，不可传入开头为ssh的命令语句；
@@ -36,7 +56,7 @@ public class LinuxExecute {
 	 * @param command 语句
 	 * @return -1:则为try{}catch{}异常；
 	 */
-	public static Integer sshExecute(String host, String user, String pwd, Integer port, String command) {
+	public Integer sshExecute(String host, String user, String pwd, Integer port, String command) {
 		StringBuffer sb = new StringBuffer();
 		Session session = null;
 		Channel channel = null;
@@ -74,8 +94,7 @@ public class LinuxExecute {
 	 * @param uploadFile 要上传的文件路径
 	 */
 
-	public static boolean sshUpload(String host, String user, String pwd, Integer port, String directory,
-			String uploadFile) {
+	public boolean sshUpload(String host, String user, String pwd, Integer port, String directory, String uploadFile) {
 		Session session = null;
 		Channel channel = null;
 		ChannelSftp channelSftp = null;
@@ -88,7 +107,7 @@ public class LinuxExecute {
 				channelSftp.cd(directory);
 			} catch (SftpException sException) {
 				// 指定上传路径不存在
-				if (channelSftp.SSH_FX_NO_SUCH_FILE == sException.id) {
+				if (ChannelSftp.SSH_FX_NO_SUCH_FILE == sException.id) {
 					channelSftp.mkdir(directory);// 创建目录
 					channelSftp.cd(directory); // 进入目录
 				}
@@ -115,8 +134,8 @@ public class LinuxExecute {
 	 * @param localFile  本地存放路径
 	 * @return
 	 */
-	public static boolean sshDownload(String host, String user, String pwd, Integer port, String remotePath,
-			String remoteFile, String localFile) {
+	public boolean sshDownload(String host, String user, String pwd, Integer port, String remotePath, String remoteFile,
+			String localFile) {
 		Session session = null;
 		Channel channel = null;
 		ChannelSftp channelSftp = null;
@@ -154,7 +173,7 @@ public class LinuxExecute {
 	 * @param port 端口
 	 * @return
 	 */
-	public static Session getSession(String host, String user, String pwd, Integer port) throws Exception {
+	public Session getSession(String host, String user, String pwd, Integer port) throws Exception {
 		JSch jsch = new JSch();
 		jsch.getSession(user, host, port);
 		Session session = jsch.getSession(user, host, port);
@@ -171,7 +190,7 @@ public class LinuxExecute {
 	 * @param channel
 	 * @param channelSftp
 	 */
-	private static void closeSSH(Session session, Channel channel, ChannelSftp channelSftp) {
+	private void closeSSH(Session session, Channel channel, ChannelSftp channelSftp) {
 		if (session != null) {
 			session.disconnect();
 		}

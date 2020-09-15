@@ -9,6 +9,21 @@ import java.math.BigDecimal;
  *
  */
 public class DoubleUtility {
+	private static DoubleUtility du = null;
+
+	public static DoubleUtility init() {
+		if (du == null) {
+			synchronized (DoubleUtility.class) {
+				if (du == null) {
+					du = new DoubleUtility();
+				}
+			}
+		}
+		return du;
+	}
+
+	private DoubleUtility() {
+	}
 
 	/**
 	 * 将值转成double类型
@@ -16,7 +31,7 @@ public class DoubleUtility {
 	 * @param object 数值
 	 * @return
 	 */
-	public static Double parseDouble(Object object) {
+	public Double parseDouble(Object object) {
 		try {
 			return Double.parseDouble(object.toString());
 		} catch (Exception e) {
@@ -31,7 +46,7 @@ public class DoubleUtility {
 	 * @param decimalLength 小数点长度
 	 * @return
 	 */
-	public static Double operationDouble(Object object, int decimalLength) {
+	public Double operationDouble(Object object, int decimalLength) {
 		Double d = null;
 		if (!(object instanceof Double)) {
 			d = parseDouble(object);

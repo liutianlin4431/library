@@ -15,6 +15,26 @@ import org.slf4j.LoggerFactory;
  */
 public class LocalExecute {
 	private static Logger log = LoggerFactory.getLogger(LocalExecute.class);
+	private static LocalExecute le = null;
+
+	/**
+	 * 创建类（单例）
+	 * 
+	 * @return
+	 */
+	public static LocalExecute init() {
+		if (le == null) {
+			synchronized (LocalExecute.class) {
+				if (le == null) {
+					le = new LocalExecute();
+				}
+			}
+		}
+		return le;
+	}
+
+	private LocalExecute() {
+	}
 
 	/**
 	 * 执行命令
@@ -22,7 +42,7 @@ public class LocalExecute {
 	 * @param cmd_array
 	 * @return
 	 */
-	public static Integer runCommand(String cmd) {
+	public Integer runCommand(String cmd) {
 		log.debug(cmd);
 		try {
 			Process pos = Runtime.getRuntime().exec(cmd);
@@ -36,7 +56,7 @@ public class LocalExecute {
 		}
 	}
 
-	public static void printLog(InputStream is) {
+	public void printLog(InputStream is) {
 		InputStreamReader ir = null;
 		LineNumberReader input = null;
 		StringBuffer sb = new StringBuffer();

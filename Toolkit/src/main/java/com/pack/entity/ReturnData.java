@@ -3,32 +3,33 @@ package com.pack.entity;
 public class ReturnData {
 	private Object code;
 	private Object msg;
-	private Object success;
+	private Boolean success;
 	private Object data;
 
 	/**
 	 * 
 	 * @param code    错误编号
 	 * @param msg     消息
-	 * @param success 0：失败；1：成功；(旧请求存在【0：成功；1：失败；】的情况)
+	 * @param success 是否成功
 	 * @param data    返回值
 	 */
-	public ReturnData(Object code, Object msg, Object success, Object data) {
+	public ReturnData(Object code, Object msg, Boolean success, Object data) {
 		super();
 		this.code = code;
 		this.msg = msg;
+
 		this.success = success;
 		this.data = data;
 	}
 
 	/**
 	 * 
-	 * @param code
-	 * @param msg
-	 * @param success 0：失败；1：成功；(旧请求存在【0：成功；1：失败；】的情况)
-	 * @param data
+	 * @param code    错误编号
+	 * @param msg     消息
+	 * @param success 是否成功
+	 * @param data    返回值
 	 */
-	public static ReturnData create(Object code, Object msg, Object success, Object data) {
+	public static ReturnData create(Object code, Object msg, Boolean success, Object data) {
 		return new ReturnData(code, msg, success, data);
 	}
 
@@ -48,11 +49,11 @@ public class ReturnData {
 		this.msg = msg;
 	}
 
-	public Object getSuccess() {
+	public Boolean getSuccess() {
 		return success;
 	}
 
-	public void setSuccess(Object success) {
+	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
 

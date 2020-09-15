@@ -10,6 +10,22 @@ import java.util.Date;
  *
  */
 public class DateUtil {
+	private static DateUtil du = null;
+
+	public static DateUtil init() {
+		if (du == null) {
+			synchronized (DateUtil.class) {
+				if (du == null) {
+					du = new DateUtil();
+				}
+			}
+		}
+		return du;
+	}
+
+	private DateUtil() {
+	}
+
 	/**
 	 * 字符串转时间
 	 * 
