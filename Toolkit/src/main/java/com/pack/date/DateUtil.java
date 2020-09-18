@@ -33,7 +33,7 @@ public class DateUtil {
 	 * @param format
 	 * @return
 	 */
-	public static Date StrToDate(String date, String format) {
+	public Date StrToDate(String date, String format) {
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat(format);
 			return formatter.parse(date);
@@ -49,7 +49,7 @@ public class DateUtil {
 	 * @param format
 	 * @return
 	 */
-	public static String DateToStr(Date date, String format) {
+	public String DateToStr(Date date, String format) {
 		SimpleDateFormat formatter = new SimpleDateFormat(format);
 		return formatter.format(date);
 	}

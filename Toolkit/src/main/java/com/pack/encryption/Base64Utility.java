@@ -37,7 +37,7 @@ public class Base64Utility {
 	 * @param str 字符串
 	 * @return
 	 */
-	public static String encode(String str) {
+	public String encode(String str) {
 		return encode(str, CharEncoding.UTF_8);
 	}
 
@@ -48,7 +48,7 @@ public class Base64Utility {
 	 * @param coding 编码(When the encoding value is Null, the default is UTF-8)
 	 * @return
 	 */
-	public static String encode(String str, String coding) {
+	public String encode(String str, String coding) {
 		try {
 			if (StrUtility.init().StrIsNull(str)) {
 				return null;
@@ -68,7 +68,7 @@ public class Base64Utility {
 	 * @param str 字符串
 	 * @return
 	 */
-	public static String decode(String str) {
+	public String decode(String str) {
 		return decode(str, CharEncoding.UTF_8);
 	}
 
@@ -79,7 +79,7 @@ public class Base64Utility {
 	 * @param coding 编码(When the encoding value is Null, the default is UTF-8)
 	 * @return
 	 */
-	public static String decode(String str, String coding) {
+	public String decode(String str, String coding) {
 		try {
 			if (StrUtility.init().StrIsNull(str)) {
 				return null;
