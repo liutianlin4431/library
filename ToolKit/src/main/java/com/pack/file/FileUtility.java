@@ -314,19 +314,21 @@ public class FileUtility {
 		File folder = new File(Path);
 		File[] fileArray = folder.listFiles();
 		List<Map<String, String>> fL = new ArrayList<Map<String, String>>();
-		for (File file : fileArray) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", UUID.randomUUID().toString());
-			map.put("text", file.getName());
-			map.put("path", file.getAbsolutePath());
-			if (file.isDirectory()) {
-				// 文件夹
-				map.put("state", "closed");
-			} else {
-				// 文件
-				map.put("state", null);
+		if (fileArray != null) {
+			for (File file : fileArray) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("id", UUID.randomUUID().toString());
+				map.put("text", file.getName());
+				map.put("path", file.getAbsolutePath());
+				if (file.isDirectory()) {
+					// 文件夹
+					map.put("state", "closed");
+				} else {
+					// 文件
+					map.put("state", null);
+				}
+				fL.add(map);
 			}
-			fL.add(map);
 		}
 		return fL;
 	}
