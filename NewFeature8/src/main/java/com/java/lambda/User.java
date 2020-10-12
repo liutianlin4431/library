@@ -5,9 +5,24 @@ public class User {
 	private Integer age;
 	private Double height;
 
+	public User(String name) {
+		super();
+		this.name = name;
+	}
+
+	public User(String name, Integer age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String show() {
+		return this.name;
 	}
 
 	public User(String name, Integer age, Double height) {
