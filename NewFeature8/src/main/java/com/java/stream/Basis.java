@@ -126,6 +126,11 @@ public class Basis {
 		// 查找学号等于1的学生信息
 		List<Student> newSL = sL.stream().filter((s) -> s.getId().equals(1)).collect(Collectors.toList());
 		System.out.println(newSL);
+		// sorted()——自然排序
+		// sorted(Comparator com)——定制排序
+		sL.stream().sorted((x, y) -> {
+			return Integer.compare(x.getAge(), y.getAge());
+		}).forEach(System.out::println);
 	}
 
 	/**
