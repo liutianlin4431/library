@@ -187,7 +187,7 @@ public class FileUtility {
 		}
 	}
 
-	private void writeZip(File file, String parentPath, ZipOutputStream zos) {
+	public void writeZip(File file, String parentPath, ZipOutputStream zos) {
 		if (file.exists()) {
 			if (file.isDirectory()) {// 处理文件夹
 				parentPath += file.getName() + File.separator;
