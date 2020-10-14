@@ -28,8 +28,8 @@ public class Basis {
 	@Test
 	public void test01() {
 		// 1.Collection【集合接口】 提供两种方法
-		// stream() 并行
-		// parallelStream() 串行
+		// stream() 串行
+		// parallelStream() 并行
 		List<String> list = new ArrayList<>();
 		Stream<String> stream = list.stream(); // 获取一个顺序流
 		Stream<String> parallelStream = list.parallelStream(); // 获取一个并行流
