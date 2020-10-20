@@ -1,4 +1,4 @@
-package com.java.atresia;
+package com.java;
 
 import java.util.concurrent.CountDownLatch;
 

@@ -1,4 +1,4 @@
-package com.java.list;
+package com.java;
 
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;

@@ -1,4 +1,4 @@
-package com.java.cas;
+package com.java;
 
 /**
  * 模拟CAS算法
