@@ -27,3 +27,28 @@
 	更新值B
 	当且仅当V==A时，V=B，否则不做任何操作
 ~~~
+线程
+---
+一、线程八锁关键（线程锁）
+-----
+~~~
+1. 非静态方法得锁默认为this，静态方法得锁为对应得Class实例
+2. 某一个时刻内，只能有一个线程持有锁，无论几个方法
+~~~
+二、线程池的体系结构
+-----
+~~~
+java.util.concurrent.Executor : 负责线程的使用与调度的根接口
+ 		|--*ExecutorService 子接口: 线程池的主要接口
+ 			|--ThreadPoolExecutor 线程池的实现类
+ 			|--ScheduledExecutorService 子接口：负责线程的调度
+ 				|--ScheduledThreadPoolExecutor ：继承 ThreadPoolExecutor， 实现 ScheduledExecutorService
+~~~
+ 三、工具类 : Executors 
+-----
+~~~
+	ExecutorService newFixedThreadPool() : 创建固定大小的线程池
+	ExecutorService newCachedThreadPool() : 缓存线程池，线程池的数量不固定，可以根据需求自动的更改数量。
+	ExecutorService newSingleThreadExecutor() : 创建单个线程池。线程池中只有一个线程
+	ScheduledExecutorService newScheduledThreadPool() : 创建固定大小的线程，可以延迟或定时的执行任务。
+ ~~~
