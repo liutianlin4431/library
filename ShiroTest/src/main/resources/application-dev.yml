@@ -1,0 +1,44 @@
+#Scanning mapper
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/*/*.xml
+#Print SQL statements
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  
+#Configure database connections
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123.57.110.144:3306/shiro_test?useSSL=false&serverTimezone=UTC
+    username: root
+    password: Root@123
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #Number of physical connections established during initialization
+      initial-size: 5
+      #Minimum number of connection pools
+      min-idle: 10
+      #Maximum number of connection pools
+      max-active: 50
+      #Maximum wait time when getting a connection
+      max-wait: 100
+#Configure the view parser
+  mvc:
+    view: 
+      prefix: /
+      suffix: .html
+#Upload file configuration
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+#Configure the thymeleaf position
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+#Configure session expiration time
+server:
+  servlet:
+    session:
+      timeout: 1800
