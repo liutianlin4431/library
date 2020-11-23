@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.core.io.ClassPathResource;
 
 import com.pack.console.LocalExecute;
 import com.pack.str.StrUtility;
@@ -58,24 +61,26 @@ public class FileUtility {
 	 * @param path 地址
 	 */
 	public void delPath(String path) {
-		if (StrUtility.init().Contains(os_name, "Windows")) {
-			File file = new File(path);
-			if (file.isDirectory()) {
-				File[] files = file.listFiles();
-				for (File son : files) {
-					if (son.isDirectory()) {
-						delPath(son.getAbsolutePath());
-						son.delete();
-					} else {
-						son.delete();
+		if (path != null) {
+			if (StrUtility.init().Contains(os_name, "Windows")) {
+				File file = new File(path);
+				if (file.isDirectory()) {
+					File[] files = file.listFiles();
+					for (File son : files) {
+						if (son.isDirectory()) {
+							delPath(son.getAbsolutePath());
+							son.delete();
+						} else {
+							son.delete();
+						}
 					}
+					file.delete();
+				} else {
+					file.delete();
 				}
-				file.delete();
 			} else {
-				file.delete();
+				LocalExecute.init().runCommand("rm -rf " + path);
 			}
-		} else {
-			LocalExecute.init().runCommand("rm -rf " + path);
 		}
 	}
 
@@ -331,5 +336,27 @@ public class FileUtility {
 			}
 		}
 		return fL;
+	}
+
+	/**
+	 * 获取类资源目录下的文件内容
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public String ClassPathResourceFile(String path) {
+		StringBuilder sb = new StringBuilder();
+		// 开始解析配置文件信息
+		ClassPathResource resource = new ClassPathResource(path);
+		try {
+			InputStream is = resource.getInputStream();
+			byte[] b = new byte[is.available()];
+			while (is.read(b) != -1) {
+				sb.append(new String(b));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
 	}
 }
