@@ -8,7 +8,6 @@ public class Student {
 
 	public Student() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Student(Integer id, String name, Integer age, Sex sex) {

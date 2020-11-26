@@ -124,7 +124,6 @@ public class Md5Util {
 		try {
 			md = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// 将盐数据传入消息摘要对象
@@ -133,7 +132,6 @@ public class Md5Util {
 		try {
 			md.update(password.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// 获得消息摘要的字节数组
