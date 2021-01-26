@@ -1,9 +1,9 @@
 package com.cloud.entity;
 
-public class CommonResult<T> {
+public class CommonResult {
 	private Integer code;
 	private String message;
-	private T data;
+	private Object data;
 
 	public CommonResult() {
 		super();
@@ -13,7 +13,7 @@ public class CommonResult<T> {
 		this(code, message, null);
 	}
 
-	public CommonResult(Integer code, String message, T data) {
+	public CommonResult(Integer code, String message, Object data) {
 		super();
 		this.code = code;
 		this.message = message;
@@ -36,11 +36,11 @@ public class CommonResult<T> {
 		this.message = message;
 	}
 
-	public T getData() {
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 }
