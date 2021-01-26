@@ -20,6 +20,7 @@
 	<modules>
 		<module>cloud-provider-payment8001</module>
 		<module>cloud-provider-order80</module>
+		<module>cloud-app</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
