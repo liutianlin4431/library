@@ -59,14 +59,13 @@ public class LocalExecute {
 	public void printLog(InputStream is) {
 		InputStreamReader ir = null;
 		LineNumberReader input = null;
-		StringBuffer sb = new StringBuffer();
 		try {
 			ir = new InputStreamReader(is);
 			input = new LineNumberReader(ir);
-			while (input.ready()) {
-				sb.append(input.readLine());
+			String ln = "";
+			while ((ln = input.readLine()) != null) {
+				log.debug(ln);
 			}
-			log.debug(sb.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
