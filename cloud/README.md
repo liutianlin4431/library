@@ -1,6 +1,8 @@
-**cloud-provider-payment8001:微服务提供支付模块** 
+**cloud-provider-payment8001/cloud-provider-payment8001:（集群）微服务提供支付模块** 
 
 **cloud-consumer-order80:微服务消费支付模块** 
+
+**cloud-eureka-server7001/cloud-eureka-server7002：(集群)eureka注册中心**
 
 **cloud-api-commons:微服务公共模块**
 
@@ -16,5 +18,26 @@
 
 > 在服务注册与发现中，有一个注册中心。当服务器启动的时候，会把当前自己服务器的信息（比如服务器通信地址等）以别名方式注册到服务中心上。另一方（消费者|服务器提供者），以该别名的方式去注册中心上获取到实际的服务通信地址，然后再实现本地RPC调用RPC远程调用框架核心设计思想：在于注册中心，因为使用注册中心管理每个服务与服务之间的一个依赖关系（服务治理概念）。在任何RPC远程框架中，都会有一个注册中心存放服务器地址相关信息
 
+------
 
+**Eureka包含两个组件：Eureka Server和Eureka Clinet**
 
+> Eureka Server提供服务注册服务
+>
+> 各个微服务节点通过配置启动后，会在EurekaServer中进行注册，这样EurekaServer中的服务注册表中讲将会存储所有可用的服务节点的信息，服务节点的信息可以在见面中直观看到。
+
+> Eureka Clinet通过注册中心进行访问
+>
+> 是一个java客户端，用户简化Eureka Server的交互，客户端同事也具备一个内置的、使用轮询（round-robin）负载算法的负载均衡器。在应用启动后，将会向Eureka Server发送心跳（默认周期30秒）。如果Eureka Server在多个心跳中期内没有接收到某个节点的细条，Eureka Server将会从服务注册表中把这个服务节点移除（默认90秒）
+
+------
+
+**Eureka自我保护记住**
+
+> 为什么产生？
+>
+> 为了防止Eureka Client 可以正常运行，但是与Eureka Server 网络不通的情况下，Eureka Server **不会立刻**将 Eureka Client 服务剔除
+
+> 什么是自我保护？
+>
+> 默认情况下，如果Eureka Server在一定时间内没有接收到某个微服务实例的心跳，Eureka Server 将会注销该实例（默认90秒）。但是当前网络分区故障发生（延时、卡顿、拥挤）时，微服务与Eureka Server 之间无法正常通信，以上行为可能变得非常危险—**因为微服务本身是健康的，此时本不应该注销这个微服务**。Eureka 通过自“自我保护模式”来解决这个问题—当Eureka Server 节点在短时间内丢失过多客户端时（可能发生网络分区故障），那么这个节点就会进入自我保护。
