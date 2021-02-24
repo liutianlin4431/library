@@ -31,4 +31,9 @@ public class PaymentCon {
 	public CommonResult getPaymentById(@PathVariable("id") Long id) {
 		return new CommonResult(200, "成功-" + serPort, paymentSer.getById(id));
 	}
+
+	@GetMapping("/payment/lb")
+	public String getLb() {
+		return serPort.toString();
+	}
 }

@@ -1,7 +1,12 @@
 package com.cloud.controller;
 
+import java.net.URI;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.cloud.entity.CommonResult;
 import com.cloud.entity.Payment;
+import com.cloud.lb.LoadBalancer;
 
 @RestController
 public class OrderCon {
@@ -49,5 +55,27 @@ public class OrderCon {
 			return entity.getBody();
 		}
 		return new CommonResult(400, "查询异常");
+	}
+
+	@Resource
+	private LoadBalancer loadBalancer;
+	@Resource
+	private DiscoveryClient discoveryClient;
+
+	/**
+	 * 使用自己写的负载均衡算法 
+	 * ？？是否需要注释配置类的@LoadBalanced注解
+	 * @return
+	 */
+	@GetMapping("/consumer/payment/lb")
+	public String getLb() {
+		// 获取erueka注册中心中所有CLOUD-PAYMENT-SERVICE服务
+		List<ServiceInstance> siL = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+		if (siL == null || siL.size() <= 0) {
+			return null;
+		}
+		ServiceInstance si = loadBalancer.instance(siL);
+		URI uri = si.getUri();
+		return restTemplate.getForObject(uri + "/payment/lb", String.class);
 	}
 }
