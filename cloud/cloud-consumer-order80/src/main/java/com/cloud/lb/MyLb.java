@@ -6,6 +6,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.stereotype.Component;
 
+/**
+ * 自己写负载均衡算法
+ * 
+ * @author ltl
+ *
+ */
 @Component
 public class MyLb implements LoadBalancer {
 	// 原子整型

@@ -36,4 +36,9 @@ public class PaymentCon {
 	public String getLb() {
 		return serPort.toString();
 	}
+
+	@GetMapping("/payment/timeOut")
+	public String getTimeOut() {
+		return serPort.toString();
+	}
 }

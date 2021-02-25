@@ -8,6 +8,8 @@ eureka：基本搭建
 	cloud-consumer-order80:eureka客户端-微服务消费支付模块 
 
 	cloud-eureka-server7001/cloud-eureka-server7002：(集群)eureka注册中心
+	
+	cloud-consumer-feign-order80：使用openfeign调用HTTP接口
 ```
 
 

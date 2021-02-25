@@ -1,0 +1,27 @@
+server:
+  port: 80
+spring:
+  application:
+    name: cloud-order-service
+eureka:
+  client:
+    #是否将自己注册到eureka server
+    register-with-eureka: true
+    #是否从eureka server抓取已有的注册信息，默认为true，单节点无所谓，汲取必须设置为true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+#解决openfeign返回时间超时的问题；默认是1秒钟;
+feign:
+  client:
+    config:
+      default:
+      #简历连接所用的时间，适用于网络状况正常的情况下，两端连接所需要的时间
+        connect-timeout: 5000
+      #指建立连接后从服务端读取到可用资源所用的时间
+        read-timeout: 5000
+logging:
+  level:
+    #feign日志使用哪个级别监控哪个接口
+    com.cloud.ser.PaymentFeignSer: debug
+       

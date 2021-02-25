@@ -1,5 +1,7 @@
 package com.cloud.controller;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +36,16 @@ public class PaymentCon {
 
 	@GetMapping("/payment/lb")
 	public String getLb() {
+		return serPort.toString();
+	}
+
+	@GetMapping("/payment/timeOut")
+	public String getTimeOut() {
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return serPort.toString();
 	}
 }

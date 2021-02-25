@@ -69,7 +69,7 @@ public class OrderCon {
 	 */
 	@GetMapping("/consumer/payment/lb")
 	public String getLb() {
-		// 获取erueka注册中心中所有CLOUD-PAYMENT-SERVICE服务
+		// 获取eureka注册中心中所有CLOUD-PAYMENT-SERVICE服务
 		List<ServiceInstance> siL = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
 		if (siL == null || siL.size() <= 0) {
 			return null;
