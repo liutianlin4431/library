@@ -25,4 +25,15 @@ public class PaymentCon {
 	public String timeOut(@PathVariable("id") Long id) {
 		return paymentSer.timeOut(id);
 	}
+
+	/**
+	 * 熔断测试接口
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/payment/circuit/{id}")
+	public String paymentCircuitBreaker(@PathVariable("id") Long id) {
+		return paymentSer.paymentCircuitBreaker(id);
+	}
 }
