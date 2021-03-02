@@ -12,6 +12,15 @@ eureka：基本搭建
 	cloud-consumer-feign-order80：使用openfeign调用HTTP接口
 ```
 
+```tex
+alibab:基础搭建
+	cloudalibaba-consumer-nacos-order80：客户端-微服务消费支付模块 
+	
+	cloudalibaba-provider-payment9001/9002：客户端-微服务提供支付模
+	
+	cloudalibaba-config-nacos-client3377：nacos配置中心使用
+```
+
 
 
 ------
