@@ -5,18 +5,14 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@RefreshScope
-public class ConfigClientController
-{
-    @Value("${config.info}")
-    private String configInfo;
+@RefreshScope // 动态刷新yml配置
+public class ConfigClientController {
+	@Value("${config.info}")
+	private String configInfo;
 
-    @GetMapping("/config/info")
-    public String getConfigInfo() {
-        return configInfo;
-    }
+	@GetMapping("/config/info")
+	public String getConfigInfo() {
+		return configInfo;
+	}
 }
- 
- 

@@ -6,7 +6,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 100.10.10.206:8848
+        server-addr: 100.10.10.206:8847,100.10.10.206:8848,100.10.10.206:8849
 service-url:
   nacos-user-service: http://nacos-payment-provider
 
