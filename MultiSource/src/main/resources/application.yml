@@ -1,0 +1,24 @@
+mybatis-plus:
+  mapper-locations:
+    - classpath:mapper/*/*.xml
+spring:
+  datasource:
+    first:
+      url: jdbc:mysql://100.10.10.206:3306/ms1?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: root@123
+      driverClassName: com.mysql.cj.jdbc.Driver
+    second:
+      url: jdbc:mysql://100.10.10.206:3306/ms2?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: root@123
+      driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      #Number of physical connections established during initialization
+      initial-size: 5
+      #Minimum number of connection pools
+      min-idle: 5
+      #Maximum number of connection pools
+      max-active: 20
+      #Maximum wait time when getting a connection
+      max-wait: 60000
