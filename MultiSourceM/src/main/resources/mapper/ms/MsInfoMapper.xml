@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ms.msinfo.mapper.MsInfoMapper">
+	<select id="getById" resultType="com.ms.msinfo.entity.MsInfo">
+		SELECT
+		g.id,
+		g.info
+		FROM
+		msinfo AS g
+		where g.id = #{id}
+	</select>
+</mapper> 
