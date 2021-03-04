@@ -7,8 +7,16 @@ spring:
     nacos:
       discovery:
         server-addr: 100.10.10.206:8847,100.10.10.206:8848,100.10.10.206:8849
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
 service-url:
   nacos-user-service: http://nacos-payment-provider
+#对Feign的支持
+feign:
+  sentinel:
+    enabled: true
 
 
  
