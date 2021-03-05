@@ -14,9 +14,14 @@ public class MsInfoController {
 
 	@GetMapping(value = "/get/data")
 	public void getData() {
-		MsInfo ms1 = mis.getById1(1);
-		System.out.println(ms1.toString());
-		MsInfo ms2 = mis.getById2(1);
-		System.out.println(ms2.toString());
+		Long time = System.currentTimeMillis();
+		if (time % 2 == 0 || time % 6 == 0) {
+			MsInfo ms1 = mis.getById1(1);
+			System.out.println(ms1.toString());
+		} else {
+			MsInfo ms2 = mis.getById2(1);
+			System.out.println(ms2.toString());
+		}
+
 	}
 }
