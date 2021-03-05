@@ -1,0 +1,22 @@
+server:
+  port: 2002
+spring:
+  application:
+    name: seata-storage-service
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: default
+    nacos:
+      discovery:
+        server-addr: 100.10.10.206:8847,100.10.10.206:8848,100.10.10.206:8849
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://100.10.10.206:3306/seata_storage?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root@123
+mybatis-plus:
+  mapper-locations:    - classpath:mapper/*.xml
+  #打印sql语句
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
