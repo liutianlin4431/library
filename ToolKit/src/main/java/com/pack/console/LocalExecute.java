@@ -46,8 +46,9 @@ public class LocalExecute {
 		log.debug(cmd);
 		try {
 			Process pos = Runtime.getRuntime().exec(cmd);
-			printLog(pos.getErrorStream());
+			// input信息需要在error之前执行，否input信息会阻塞-如果一步执行不存在此问题
 			printLog(pos.getInputStream());
+			printLog(pos.getErrorStream());
 			return pos.waitFor();
 		} catch (Exception e) {
 			e.printStackTrace();
