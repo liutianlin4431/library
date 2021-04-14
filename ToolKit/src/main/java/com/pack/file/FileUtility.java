@@ -50,8 +50,8 @@ public class FileUtility {
 	 * @return
 	 */
 	public String StandardPath(String path) {
-		path = path.replaceAll("\\\\{1,}", "/");
-		path = path.replaceAll("/{1,}", "/");
+		path = path.replaceAll("\\\\{1,}", File.separator);
+		path = path.replaceAll("/{1,}", File.separator);
 		return path;
 	}
 
