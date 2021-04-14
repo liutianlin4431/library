@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
+import java.util.regex.Matcher;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -101,13 +102,13 @@ public class ZipHelper {
 			File[] listFiles = sourceFile.listFiles();
 			if (listFiles == null || listFiles.length == 0) {
 				if (KeepDirStructure) {
-					zos.putNextEntry(new ZipEntry(name + "/"));
+					zos.putNextEntry(new ZipEntry(name + Matcher.quoteReplacement(File.separator)));
 					zos.closeEntry();
 				}
 			} else {
 				for (File file : listFiles) {
 					if (KeepDirStructure) {
-						compress(file, zos, name + "/" + file.getName());
+						compress(file, zos, name + Matcher.quoteReplacement(File.separator) + file.getName());
 					} else {
 						compress(file, zos, file.getName());
 					}
@@ -141,9 +142,10 @@ public class ZipHelper {
 				ZipEntry entry = (ZipEntry) entries.nextElement();
 				String zipEntryName = entry.getName();
 				in = zip.getInputStream(entry);
-				String outPath = FileUtility.init().StandardPath((descDir + File.separator + zipEntryName));
+				String outPath = FileUtility.init()
+						.StandardPath((descDir + Matcher.quoteReplacement(File.separator) + zipEntryName));
 				// 判断路径是否存在,不存在则创建文件路径
-				File file = new File(outPath.substring(0, outPath.lastIndexOf("/")));
+				File file = new File(outPath.substring(0, outPath.lastIndexOf(File.separator)));
 				if (!file.exists()) {
 					file.mkdirs();
 				}

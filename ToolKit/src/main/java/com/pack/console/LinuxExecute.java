@@ -144,7 +144,7 @@ public class LinuxExecute {
 			channel = session.openChannel("sftp");
 			channel.connect();
 			channelSftp = (ChannelSftp) channel;
-			String rootPath = localFile.substring(0, localFile.lastIndexOf("/"));
+			String rootPath = localFile.substring(0, localFile.lastIndexOf(File.separator));
 			File rootPathFile = new File(rootPath);
 			if (!rootPathFile.exists()) {
 				rootPathFile.mkdirs();

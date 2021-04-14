@@ -1,6 +1,8 @@
 package com.pack.file.properties;
 
+import java.io.File;
 import java.util.Properties;
+import java.util.regex.Matcher;
 
 import org.springframework.core.io.ClassPathResource;
 
@@ -31,7 +33,7 @@ public class PropertiesUtility {
 	 * @return
 	 */
 	public Properties getPropertiesByPathAndName(String path, String name) {
-		path = FileUtility.init().StandardPath(path + "/" + name);
+		path = FileUtility.init().StandardPath(path + Matcher.quoteReplacement(File.separator) + name);
 		return this.getPropertiesByPath(path);
 	}
 
