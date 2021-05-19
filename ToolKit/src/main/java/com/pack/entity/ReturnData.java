@@ -1,6 +1,6 @@
 package com.pack.entity;
 
-@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ReturnData<T> {
 	private Object code;
 	private String msg;
@@ -80,5 +80,37 @@ public class ReturnData<T> {
 	 */
 	public static <T> ReturnData<T> Error(Object code, Exception e) {
 		return new ReturnData(code, e.getMessage(), 0, null);
+	}
+
+	public Object getCode() {
+		return code;
+	}
+
+	public void setCode(Object code) {
+		this.code = code;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public Integer getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(Integer success) {
+		this.success = success;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
 	}
 }
