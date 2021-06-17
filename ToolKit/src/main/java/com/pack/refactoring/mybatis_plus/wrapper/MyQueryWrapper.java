@@ -31,8 +31,8 @@ public class MyQueryWrapper<T> extends QueryWrapper<T> {
 	 * @param val  查询条件
 	 * @return
 	 */
-	public QueryWrapper<T> eqLa(FFunction<T, ?> column, Object val) {
-		return super.eq(gf(column, false), val);
+	public MyQueryWrapper<T> eqLa(FFunction<T, ?> column, Object val) {
+		return (MyQueryWrapper<T>) super.eq(gf(column, false), val);
 	}
 
 	/**
@@ -44,8 +44,8 @@ public class MyQueryWrapper<T> extends QueryWrapper<T> {
 	 * @param boo  封装方法对应的变量是否存在
 	 * @return
 	 */
-	public QueryWrapper<T> eqLa(FFunction<T, ?> column, Object val, boolean boo) {
-		return super.eq(gf(column, boo), val);
+	public MyQueryWrapper<T> eqLa(FFunction<T, ?> column, Object val, boolean boo) {
+		return (MyQueryWrapper<T>) super.eq(gf(column, boo), val);
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class MyQueryWrapper<T> extends QueryWrapper<T> {
 	 * @param val  查询条件
 	 * @return
 	 */
-	public QueryWrapper<T> neLa(FFunction<T, ?> column, Object val) {
-		return super.ne(gf(column, false), val);
+	public MyQueryWrapper<T> neLa(FFunction<T, ?> column, Object val) {
+		return (MyQueryWrapper<T>) super.ne(gf(column, false), val);
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class MyQueryWrapper<T> extends QueryWrapper<T> {
 	 * @param boo  封装方法对应的变量是否存在
 	 * @return
 	 */
-	public QueryWrapper<T> neLa(FFunction<T, ?> column, Object val, boolean boo) {
-		return super.ne(gf(column, boo), val);
+	public MyQueryWrapper<T> neLa(FFunction<T, ?> column, Object val, boolean boo) {
+		return (MyQueryWrapper<T>) super.ne(gf(column, boo), val);
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class MyQueryWrapper<T> extends QueryWrapper<T> {
 	 * @param val  查询条件
 	 * @return
 	 */
-	public QueryWrapper<T> likeLa(FFunction<T, ?> column, Object val) {
-		return super.like(gf(column, false), val);
+	public MyQueryWrapper<T> likeLa(FFunction<T, ?> column, Object val) {
+		return (MyQueryWrapper<T>) super.like(gf(column, false), val);
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class MyQueryWrapper<T> extends QueryWrapper<T> {
 	 * @param boo  封装方法对应的变量是否存在
 	 * @return
 	 */
-	public QueryWrapper<T> likeLa(FFunction<T, ?> column, Object val, boolean boo) {
-		return super.like(gf(column, boo), val);
+	public MyQueryWrapper<T> likeLa(FFunction<T, ?> column, Object val, boolean boo) {
+		return (MyQueryWrapper<T>) super.like(gf(column, boo), val);
 	}
 
 	/**
